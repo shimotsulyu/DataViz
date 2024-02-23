@@ -42,11 +42,11 @@ with st.sidebar:
 #region Graph
 def prepare_history_visualization():
     history, instance = hist.get(ticker, init_date, end_date)
-    print("Current price ->", history["Close"].iat[-1])
+    print("Current price ->", history['Close'].iat[-1])
     bollinger_figure = bollinger.get(ticker, history)
-    current_value.metric("Current Value", f"R$ {round(history["Close"][history.index.max()],2)}", f"{round((history["Close"][history.index.max()] / history["Close"][history.index[-2]] - 1) * 100,2)}")
-    min_value.metric("Min Value", f"R$ {round(history["Close"].min(),2)}", f"{round((history["Close"].min() / history["Close"][history.index.max()] - 1) * 100,2)}%")
-    max_value.metric("Min Value", f"R$ {round(history["Close"].max(), 2)}", f"{round((history["Close"].max() / history["Close"][history.index.min()] - 1) * 100,2)}%")
+    current_value.metric("Current Value", f"R$ {round(history['Close'][history.index.max()], 2)}", f"{round((history['Close'][history.index.max()] / history['Close'][history.index[-2]] - 1) * 100,2)}")
+    min_value.metric("Min Value", f"R$ {round(history['Close'].min(), 2)}", f"{round((history['Close'].min() / history['Close'][history.index.max()] - 1) * 100,2)}%")
+    max_value.metric("Min Value", f"R$ {round(history['Close'].max(), 2)}", f"{round((history['Close'].max() / history['Close'][history.index.min()] - 1) * 100,2)}%")
     graph.plotly_chart(bollinger_figure, use_container_width=True, sharing="streamlit")
 
 if ticker and sleep_time:
